@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!-- netstandard2.1 + C# 9 is what Unity can handle, so keep it this way.
+       That means no PriorityQueue, no records, no file-scoped namespaces in here. -->
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <LangVersion>9.0</LangVersion>
+    <Nullable>disable</Nullable>
+    <RootNamespace>Pathfinding</RootNamespace>
+  </PropertyGroup>
+
+</Project>

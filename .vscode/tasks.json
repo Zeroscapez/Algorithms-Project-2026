@@ -1,0 +1,22 @@
+{
+  // Terminal > Run Task... lists these. Ctrl+Shift+B runs the harness.
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Run harness",
+      "type": "process",
+      "command": "dotnet",
+      "args": ["run", "-c", "Release", "--project", "src/Pathfinding.Runner"],
+      "group": { "kind": "build", "isDefault": true },
+      "problemMatcher": "$msCompile"
+    },
+    {
+      "label": "Run tests",
+      "type": "process",
+      "command": "dotnet",
+      "args": ["test"],
+      "group": { "kind": "test", "isDefault": true },
+      "problemMatcher": "$msCompile"
+    }
+  ]
+}
