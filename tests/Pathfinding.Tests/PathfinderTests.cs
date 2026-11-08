@@ -2,7 +2,7 @@ using Pathfinding;
 using Xunit;
 
 // Tests every algorithm has to pass. Each algorithm gets a tiny class at the bottom of this file.
-// When JPS is ready, add:   public class JpsTests : PathfinderTests { protected override IPathfinder Create() => new Jps(); }
+// When JPS+ is ready, add:   public class JpsPlusTests : PathfinderTests { protected override IPathfinder Create() => new JpsPlus(); }
 public abstract class PathfinderTests
 {
     protected abstract IPathfinder Create();
@@ -193,4 +193,9 @@ public abstract class PathfinderTests
 public class AStarTests : PathfinderTests
 {
     protected override IPathfinder Create() => new AStar();
+}
+
+public class JpsTests : PathfinderTests
+{
+    protected override IPathfinder Create() => new Jps();
 }

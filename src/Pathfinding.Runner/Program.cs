@@ -3,11 +3,11 @@ using Pathfinding;
 // The test harness: runs every algorithm on every map and prints the metrics.
 // First a few tiny built-in maps, then every .map file in the maps folder (or a folder you pass in).
 
-// Algorithms to test. When JPS and JPS+ exist, just uncomment them here.
+// Algorithms to test. When JPS+ exists, just uncomment it here.
 var pathfinders = new List<IPathfinder>
 {
     new AStar(),
-    // new Jps(),
+    new Jps(),
     // new JpsPlus(),
 };
 
@@ -55,7 +55,8 @@ else
 }
 
 // ---- Run everything ----
-Console.WriteLine($"{"Map",-22} {"Algorithm",-9} {"Start",-9} {"Goal",-9} {"Found",-6} {"Cost",9} {"Expanded",9} {"Avg ms",9}");
+// Rows get collected first so the table can be printed fastest-first at the end.
+var rows = new List<(double AvgMs, string Line)>();
 
 foreach (var (name, map, queries) in maps)
 {
@@ -81,10 +82,16 @@ foreach (var (name, map, queries) in maps)
             }
 
             string cost = r.Found ? r.PathCost.ToString("F3") : "-";
-            Console.WriteLine($"{name,-22} {finder.Name,-9} {start,-9} {goal,-9} {r.Found,-6} {cost,9} {r.NodesExpanded,9} {totalMs / Runs,9:F4}");
+            double avgMs = totalMs / Runs;
+            rows.Add((avgMs, $"{name,-22} {finder.Name,-9} {start,-9} {goal,-9} {r.Found,-6} {cost,9} {r.NodesExpanded,9} {avgMs,9:F4}"));
         }
     }
 }
+
+// ---- Print the table, sorted by speed (fastest first; ties keep run order) ----
+Console.WriteLine($"{"Map",-22} {"Algorithm",-9} {"Start",-9} {"Goal",-9} {"Found",-6} {"Cost",9} {"Expanded",9} {"Avg ms",9}");
+foreach (var row in rows.OrderBy(row => row.AvgMs))
+    Console.WriteLine(row.Line);
 
 // Random start/goal pairs on open cells. Fixed seed, so you get the same pairs every run
 // (and every algorithm gets the exact same pairs).
