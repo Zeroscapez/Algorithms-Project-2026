@@ -6,7 +6,7 @@ using Pathfinding;
 /// <summary>
 /// Finds shortest paths on eight-directional grids using Jump Point Search.
 /// </summary>
-public class JumpPointSearch : IPathfinder
+public class JumpPointSearch : IPathfinder 
 {
     /// <summary>
     /// Gets the short name used to identify this pathfinding algorithm.
