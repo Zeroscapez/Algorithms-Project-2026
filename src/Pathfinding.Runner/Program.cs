@@ -8,7 +8,7 @@ var pathfinders = new List<IPathfinder>
 {
     new AStar(),
     new Jps(),
-    // new JpsPlus(),
+    new JpsPlus(),
 };
 
 const int Runs = 10;        // each search gets timed this many times and averaged
